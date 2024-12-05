@@ -579,10 +579,10 @@ ______________________________
                         const file = new File([blob], "canvas_image.png", { type: "image/png" });
                         navigator.share({
                             files: [file],
-                            title: "Lebanon_Jewelery",
+                            title: "",
                             text: ""
                         }).then(() => {
-                            console.log("Image shared successfully!");
+                            // console.log("Image shared successfully!");
                         }).catch(err => {
                             console.error("Error sharing the image:", err);
                         });
