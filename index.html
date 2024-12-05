@@ -494,7 +494,8 @@
             const   otmaniCoinPrice = price21kBuy *otmaniCoinWeight;
             const halfOtmaniCoinPrice = otmaniCoinPrice/2;
             const quarterOtmaniCoinPrice = otmaniCoinPrice/4;
-
+            const mabiee = ouncePrice +input1Value;
+            const shiraa = ouncePrice +input2Value;
             
 
             const today = new Date();
@@ -505,7 +506,9 @@
             const result = `
 *${formattedDate}*
 
-*سعر الأونصة*: ${ouncePrice}
+*سعر الأونصة مبيع*: ${mabiee}
+*سعر الأونصة شراء*: ${shiraa}
+
 
 *سعر غرام الشراء* \`بدون أجار مصنعية\`
 \`عيار 18\`: $${price18kBuy.toFixed(2)}
