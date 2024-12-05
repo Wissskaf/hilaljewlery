@@ -682,21 +682,21 @@ ______________________________
 
             const otmaniCoinWeight = 7.20;
             const   otmaniCoinPrice = price21kBuy *otmaniCoinWeight;
-            const halfOtmaniCoinPrice = otmaniCoinPrice/2;
+            const halfOtmaniCoinPrice = otmaniCoinPrice/2;  
             const quarterOtmaniCoinPrice = otmaniCoinPrice/4;
 
                const today = new Date();
                const formattedDate = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium' }).format(today);
        
                // Table data
-               const headers = [formattedDate, 'Buy', 'Sell'];
+               const headers = [formattedDate, 'We Sell', 'We Buy'];
                const rows = [
-                   ['18k Gold', '$ ' +price18kBuy.toFixed(2),'$ ' + price18kSell.toFixed(2)],
-                   ['21k Gold', '$ ' +price21kBuy.toFixed(2), '$ ' +price21kSell.toFixed(2)],
-                   ['Ounce Watani', '$ ' +(ouncePrice+input1Value), '$ ' +(ouncePrice+input2Value)],
-                   ['Ounce Valcambi', '$ ' +(ouncePrice+60), '$ ' +(ouncePrice-15)],
-                   [' Lira English', '$ ' +englishCoinPrice.toFixed(0), '$ ' +(englishCoinPrice-10).toFixed(0)],
-                   [' Lira Ottman', '$ ' +otmaniCoinPrice.toFixed(0), '$ ' +(otmaniCoinPrice-10).toFixed(0)]
+                   ['  Ounce Local', '$ ' +(ouncePrice+input1Value), '$ ' +(ouncePrice+input2Value)],
+                   ['  Ounce Valcambi', '$ ' +(ouncePrice+50), '$ ' +(ouncePrice-5)],
+                   ['  Lira English', '$ ' +englishCoinPrice.toFixed(0), '$ ' +(englishCoinPrice-10).toFixed(0)],
+                   ['  Lira Ottman', '$ ' +otmaniCoinPrice.toFixed(0), '$ ' +(otmaniCoinPrice-10).toFixed(0)],
+                   ['  18k Gold', '$ ' +price18kBuy.toFixed(2),'$ ' + price18kSell.toFixed(2)],
+                   ['  21k Gold', '$ ' +price21kBuy.toFixed(2), '$ ' +price21kSell.toFixed(2)],
                ];
        
                // Set general text properties
@@ -705,79 +705,109 @@ ______________________________
                ctx.textAlign = "center";
                ctx.direction = "rtl"; // RTL for Arabic text
 
-               const text = "سعر الأونصة";
-                ctx.fillText(text, 540, 360);
-                const text1 = '$ '+ouncePrice ;
-                ctx.fillText(text1, 540, 450);
+              // const text = "سعر الأونصة";
+              //  ctx.fillText(text, 540, 360);
+               // const text1 = '$ '+ouncePrice ;
+                //ctx.fillText(text1, 540, 450);
 
                 ctx.fillStyle = "rgba(248, 210, 16, 0.5)";
 
 // Draw a filled rectangle
-                ctx.fillRect(0, 1830, 1080, 100); // x, y, width, height
-                ctx.fillStyle = "#000000";
+                //ctx.fillRect(0, 1830, 1080, 100); // x, y, width, height
+                //ctx.fillStyle = "#000000";
 
                 ctx.font = "42px Parkinsans";
 
-                const phone = "For Your Requests Please Contact 71/808465";
-                ctx.fillText(phone, 540, 1890);
+               // const phone = "For Your Requests Please Contact 71/808465";
+                //ctx.fillText(phone, 540, 1890);
 
                 
                // Table properties
                const tableStartX = 100; // Padding on the left
                const tableWidth = canvas.width - 200; // Width accounting for padding
-               const tableStartY = 540;
+               const tableStartY = 400;
                const rowHeight = 100;
-               const colWidth = tableWidth / 3; // Three columns
-       
-               // Draw table headers
-               headers.forEach((header, index) => {
-                   const xPosition = tableStartX + index * colWidth;
-                   ctx.fillStyle = "rgba(248, 210, 16, 0.5)"; // Blue background
-                   ctx.fillRect(xPosition, tableStartY, colWidth, rowHeight);
-       
-                   ctx.fillStyle = "#000000"; // White text
-                   ctx.font = "bold 42px  Parkinsans,Arial";
-                   ctx.fillText(header, xPosition + colWidth / 2, tableStartY + rowHeight / 2 + 12);
-               });
-       
-               // Draw table rows
-               rows.forEach((row, rowIndex) => {
-                   row.forEach((cell, colIndex) => {
-                       const xPosition = tableStartX + colIndex * colWidth;
-                       const yPosition = tableStartY + (rowIndex + 1) * rowHeight;
-       
-                       // Alternate row background color
-                       //ctx.fillStyle = rowIndex % 2 === 0 ? "#F0F8FF" : "#FFFFFF"; // Light blue or white
-                       //ctx.fillRect(xPosition, yPosition, colWidth, rowHeight);
-       
-                       // Draw cell text
-                       ctx.fillStyle = "#000000"; // Black text
-                       ctx.font = "34px bold Parkinsans , Verdana";
-                       ctx.fillText(cell, xPosition + colWidth / 2, yPosition + rowHeight / 2 + 12);
-                   });
-               });
-       
-               // Draw table borders
-               ctx.strokeStyle = "rgba(248, 210, 16, 0.5)"; //border color
-               ctx.lineWidth = 3;
-       
-               // Vertical lines
-               for (let i = 0; i <= 3; i++) {
-                   const xPosition = tableStartX + i * colWidth;
-                   ctx.beginPath();
-                   ctx.moveTo(xPosition, tableStartY);
-                   ctx.lineTo(xPosition, tableStartY + (rows.length + 1) * rowHeight);
-                   ctx.stroke();
-               }
-       
-               // Horizontal lines
-               for (let i = 0; i <= rows.length + 1; i++) {
-                   const yPosition = tableStartY + i * rowHeight;
-                   ctx.beginPath();
-                   ctx.moveTo(tableStartX, yPosition);
-                   ctx.lineTo(tableStartX + tableWidth, yPosition);
-                   ctx.stroke();
-               }
+               const cellPadding = 4; // Padding in pixels
+
+              // Table properties
+const firstColWidth = (2 / 4) * tableWidth; // First column takes 2 parts
+const colWidth = (1 / 4) * tableWidth; // Remaining two columns take 1 part each
+
+// Draw table headers
+headers.forEach((header, index) => {
+    const xPosition = index === 0 ? tableStartX + cellPadding : tableStartX + firstColWidth + (index - 1) * colWidth + cellPadding;
+    const headerWidth = index === 0 ? firstColWidth - 2 * cellPadding : colWidth - 2 * cellPadding;
+    const headerHeight = rowHeight - 2 * cellPadding;
+
+    ctx.fillStyle = "#ffffff"; // Blue background
+    ctx.fillRect(xPosition, tableStartY + cellPadding, headerWidth, headerHeight);
+
+    ctx.fillStyle = "#000000"; // Text color
+    ctx.font = "bold 42px Parkinsans, Arial";
+    ctx.textBaseline = "middle";
+
+    if (index === 0) {
+        // Align left for the first column
+        ctx.textAlign = "left";
+        ctx.fillText(header, xPosition + cellPadding+5, tableStartY + rowHeight / 2);
+    } else {
+        // Align center for other columns
+        ctx.textAlign = "center";
+        ctx.fillText(header, xPosition + headerWidth / 2, tableStartY + rowHeight / 2);
+    }
+});
+
+// Draw table rows
+rows.forEach((row, rowIndex) => {
+    row.forEach((cell, colIndex) => {
+        const xPosition = colIndex === 0 ? tableStartX + cellPadding : tableStartX + firstColWidth + (colIndex - 1) * colWidth + cellPadding;
+        const cellWidth = colIndex === 0 ? firstColWidth - 2 * cellPadding : colWidth - 2 * cellPadding;
+        const yPosition = tableStartY + (rowIndex + 1) * rowHeight + cellPadding;
+        const cellHeight = rowHeight - 2 * cellPadding;
+
+        // Alternate row background color
+        ctx.fillStyle = "#FFFFFF"; // Light blue or white
+        ctx.fillRect(xPosition, yPosition, cellWidth, cellHeight);
+
+        // Draw cell text
+        ctx.fillStyle = "#000000"; // Text color
+        ctx.font = "34px bold Parkinsans, Verdana";
+        ctx.textBaseline = "middle";
+
+        if (colIndex === 0) {
+            // Align left for the first column
+            ctx.textAlign = "left";
+            ctx.fillText(cell, xPosition + cellPadding+20, yPosition + cellHeight / 2);
+        } else {
+            // Align center for other columns
+            ctx.textAlign = "center";
+            ctx.fillText(cell, xPosition + cellWidth / 2, yPosition + cellHeight / 2);
+        }
+    });
+});
+
+// Draw table borders (no changes needed)
+ctx.strokeStyle = "rgba(248, 210, 16, 0)"; // Border color
+ctx.lineWidth = 5;
+
+// Vertical lines
+for (let i = 0; i <= 3; i++) {
+    const xPosition = i === 0 ? tableStartX : tableStartX + firstColWidth + (i - 1) * colWidth;
+    ctx.beginPath();
+    ctx.moveTo(xPosition, tableStartY);
+    ctx.lineTo(xPosition, tableStartY + (rows.length + 1) * rowHeight);
+    ctx.stroke();
+}
+
+// Horizontal lines
+for (let i = 0; i <= rows.length + 1; i++) {
+    const yPosition = tableStartY + i * rowHeight;
+    ctx.beginPath();
+    ctx.moveTo(tableStartX, yPosition);
+    ctx.lineTo(tableStartX + tableWidth, yPosition);
+    ctx.stroke();
+}
+
        
                // Create download button
                createDownloadButton();
