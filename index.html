@@ -486,7 +486,7 @@
             const price18kSell = gramPriceKaser * 0.74; 
 
             const englishCoinWeight = 8;
-            const englishCoinPrice = price21kBuy * englishCoinWeight;
+            const englishCoinPrice = (price21kBuy * englishCoinWeight);
             const halfEnglishCoinPrice = (englishCoinPrice/2);
             const quarterEnglishCoinPrice = (englishCoinPrice/4);
 
@@ -506,20 +506,23 @@
 *${formattedDate}*
 
 *سعر الأونصة*: ${ouncePrice}
-______________________________
+
 *سعر غرام الشراء* \`بدون أجار مصنعية\`
 \`عيار 18\`: $${price18kBuy.toFixed(2)}
 \`عيار 21\`: $${price21kBuy.toFixed(2)}
-______________________________
+
+
 *غرام المبيع* \`بدون أجار مصنعية\`
 \`عيار 18\`: $${price18kSell.toFixed(2)}
 \`عيار 21\`: $${price21kSell.toFixed(2)}
-______________________________
+
+
 *الليرة الإنجليزي* \`بدون أجار مصنعية\`
 \`ليرة\`: $${englishCoinPrice.toFixed(0)}
 \`نص ليرة\`: $${halfEnglishCoinPrice.toFixed(0)}
 \`ربع ليرة\`: $${quarterEnglishCoinPrice.toFixed(0)}
-______________________________
+
+
 *سعر الليرة العثماني* \`بدون أجار مصنعية\`
 \`ليرة\`: $${otmaniCoinPrice.toFixed(0)}
 \`نص ليرة\`: $${halfOtmaniCoinPrice.toFixed(0)}
@@ -527,8 +530,8 @@ ______________________________
 
 > اسعار اونصة الذهب الفوري تخضع للعرض والطلب في تداول  البورصات العالمية في حال كان لديك أي استفسار او اسئلة لدينا فريق عمل جاهز للتواصل معكم
 
-مجوهرات لبنان  
-71808465
+Hilal Jewelry
+70123107
 
 
 `;
@@ -641,9 +644,9 @@ ______________________________
                    drawTable(ctx);
                };
                lower.onload = () => {
-                const imgWidth = 720; // Logo width
-               const imgHeight = 500; // Logo height
-               const lowerPadding =1300;
+                const imgWidth = 800; // Logo width
+               const imgHeight = 555; // Logo height
+               const lowerPadding =1250;
 
                 ctx.drawImage(lower, (canvas.width - imgWidth) / 2, lowerPadding, imgWidth, imgHeight);
                }
